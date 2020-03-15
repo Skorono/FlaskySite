@@ -1,5 +1,5 @@
 from datetime import datetime
-from flask import Flask, render_template, url_for
+from flask import Flask, render_template, url_for, redirect
 from flask_script import Manager
 from flask_bootstrap import Bootstrap
 from flask_moment import Moment
@@ -32,13 +32,16 @@ def page_not_found(e):
 def internal_server_error(e):
     return render_template('500.html'), 500
 
+@app.route('/home')
+def welcome():
+	return render_template('welcome.html')
 
 @app.route('/', methods=['GET','POST'])
 def index():
 	line = LinePasswordField()
 	email.send()
 	if line.password.data == email.message:
-		return render_template('welcome.html')
+		return redirect(url_for('welcome'))
 	return render_template('keycheck.html', line=line)	
 
 
