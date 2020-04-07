@@ -1,2 +1,2 @@
-def account_put():
-  return ('email','password')
+email = 'email_for_example'
+pasword = 'easy_password'
