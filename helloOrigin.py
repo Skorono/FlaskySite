@@ -1,3 +1,4 @@
+import config
 from datetime import datetime
 from flask import Flask, render_template, url_for, redirect, session
 from flask_script import Manager
@@ -55,7 +56,7 @@ def warning():
 @app.route('/register', methods=['GET','POST'])
 def reg():
 	line = LineRegisterField()
-	email = SendYandexEmail('astat.popov@yandex.ru', '233833kasano', line.email.data)	
+	email = SendYandexEmail(config.email, config.password, line.email.data)	
 	session['email_password'] = email.message
 	if line.validate_on_submit():
 		email.send()
